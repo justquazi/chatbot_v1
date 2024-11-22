@@ -1,9 +1,10 @@
 from groq import Groq
 class Chatbot:
-    def __init__(self, key, model="llama3-8b-8192",):
-        self.key = key
+    def __init__(self, key, closeFunctions=['close','n','exit','no','nope'],  model="llama3-8b-8192"):
+        self.__key = key
         self.client = Groq(api_key=key)
         self.model = model
+        self.closeFunctions = closeFunctions
     def createBot(self):
         active = True
         responses = 0
@@ -21,8 +22,9 @@ class Chatbot:
             print(chat_completion.choices[0].message.content)
             responses += 1
             content = str(input('Any more questions? '))
-            if content == 'N':
-                active = False
+            for i in self.closeFunctions:
+                if i.lower() == content.lower():
+                    active = False
             
         print('Program terminated successfully.')
         print(f'Total Responses: {responses}')
