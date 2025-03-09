@@ -29,5 +29,5 @@ class Chatbot:
         print('Program terminated successfully.')
         print(f'Total Responses: {responses}')
 
-bot = Chatbot(key='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')
+bot = Chatbot(key='REDACTED')
 bot.createBot()
